@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reddit Moderator Bot</title>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/1.1.0/webcomponents-hi.js"></script> -->
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <script type="text/javascript" src="js/main.js"></script>
+</head>
+<body onload="refresh()">
+    <main id="settings">
+        <h1 id="header">Reddit Moderator Bot</h1>
+        <div id="sets" class="tile">
+            <h2>Sample Sets</h2>
+            <ul id="sampleSetList">
+            </ul>
+            <form id="sampleSetForm" onsubmit="return submitSampleSetForm()">
+                <label for="sampleName">Name:</label>
+                <input type="text" id="sampleName">
+                <label for="sampleLink">Link:</label>
+                <input id="sampleLink" type="text">
+                <label for="sampleSize">Size:</label>
+                <input id="sampleSize" type="number" value=10000>
+                <input type="Submit" value="Add sample set">
+            </form>
+        </div>
+
+        <div id="subs" class="tile">
+            <h2>Monitored Subreddits</h2>
+            <ul id="subredditsList">
+            </ul>
+            <form id="subredditsForm" onsubmit="return submitSubredditsForm()">
+                <label for="subLink">Subreddit name:</label>
+                <input id="subLink" type="text">
+                <input type="Submit" value="Add subreddit">
+            </form>
+        </div>
+
+        <div id="config" class="tile">
+            <h2>Config</h2>
+            <form id="configForm" action="/config" method="post">
+                <label for="clientId">Client id</label>
+                <input name="clientId" id="clientId" type="text">
+                <label for="clientSecret">Client secret</label>
+                <input name="clientSecret" id="clientSecret" type="text">
+                <label for="username">Username</label>
+                <input name="username" id="username" type="text">
+                <label for="password">Password </label>
+                <input name="password" id="password" type="text">
+                <input type="submit" value="submit">
+            </form>
+        </div>
+
+        <div id="triggers" class="tile">
+            <h2>Triggers</h2>
+            <ul id="triggersList">
+            </ul>
+
+            <form onsubmit="return submitRegexTriggerForm()">
+                <input hidden id="type" type="number" value="0">
+                <label for="regexName">Name:</label>
+                <input type="text" id="regexName">
+                <label for="regexForm">Regex rule:</label>
+                <input id="regexForm" type="text">
+                <input type="Submit" value="Add Rule">
+            </form>
+
+            <form onsubmit="return submitTriggerForm()">
+                <label for="triggerName">Name:</label>
+                <input type="text" id="triggerName">
+                <label for="triggerType">Type</label>
+                <select id="triggerType">
+                    <option value="1">Bayesian</option>
+                    <option value="2">Similarity</option>
+                    <option value="3">Anomaly</option>
+                    <option value="4">All</option>
+                </select>
+
+                <label for="goodSampleSetSelect">Good Comment Sample</label>
+                <select id="goodSampleSetSelect"></select>
+
+                <label for="badSampleSetSelect">Bad Comment Sample</label>
+                <select id="badSampleSetSelect"></select>
+
+                <input type="Submit" value="Add Rule">
+            </form>
+        </div>
+
+        <div id="actions" class="tile">
+            <h2>Actions</h2>
+            <ul id="actionsList">
+            </ul>
+
+            <form onsubmit="return submitActionsMessageForm()">
+                <input hidden id="ReplyActionType" value="3">
+                <label for="messageName">Name</label>
+                <input id="messageName" type="text">
+                <label for="actionMessage">Message</label>
+                <input id="actionMessage" type="text">
+                <input type="Submit" value="Add Message action">
+            </form>
+
+            <form onsubmit="return submitActionsForm()">
+                <label for="actionName">Name</label>
+                <input id="actionName" type="text">
+                <label for="actionType">Type</label>
+                <select id="actionType">
+                    <option value="0">Approve</option>
+                    <option value="1">Delete</option>
+                    <option value="2">Ban user</option>
+                    <option value="4">Delete</option>
+                </select>
+                <input type="Submit" value="Add action">
+            </form>
+        </div>
+
+        <div id="rules" class="tile">
+            <h2>Rules</h2>
+            <ul id="rulesList">
+            </ul>
+
+            <form onsubmit="return submitRuleForm()">
+                <label for="ruleName">Name:</label>
+                <input id="ruleName" type="text">
+
+                <label for="ruleSubForm">Subreddit</label>
+                <select id="ruleSubForm">
+
+                </select>
+                <label for="triggerForm">Trigger</label>
+                <select id="triggerForm">
+                </select>
+                <label for="actionForm">Action</label>
+                <select id="actionForm">
+
+                </select>
+                <input type="Submit" value="Add Rule">
+            </form>
+        </div>
+    </main>
+</body>
+</html>
